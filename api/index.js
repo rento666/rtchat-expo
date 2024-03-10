@@ -7,8 +7,8 @@ import Toast from 'react-native-root-toast';
  * 在各自的Api中，body需要 JSON.stringify(form)
  */
 
-// const host = '101.42.11.155';
-const host = '10.131.127.177';
+const host = '101.42.11.155';
+// const host = '10.131.127.177';
 const port1 = '13799';
 const port2 = '9988';
 

@@ -2,7 +2,7 @@
   "expo": {
     "name": "蝶语",
     "slug": "dieyuChat",
-    "scheme": ["dieyuChat"],
+    "scheme": "dieyuchat",
     "version": "1.0.2",
     "orientation": "portrait",
     "sdkVersion": "50.0.0",

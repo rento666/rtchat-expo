@@ -1,0 +1,39 @@
+diff --git a/node_modules/rn-emoji-picker/dist/index.js b/node_modules/rn-emoji-picker/dist/index.js
+index 1746ddb..accd8c4 100644
+--- a/node_modules/rn-emoji-picker/dist/index.js
++++ b/node_modules/rn-emoji-picker/dist/index.js
+@@ -4,7 +4,7 @@ exports.emojiFromUtf16 = void 0;
+ const react_1 = require("react");
+ const react_native_1 = require("react-native");
+ const tabBar_1 = require("./tabBar");
+-const input_1 = require("./input");
++// const input_1 = require("./input");
+ const constants_1 = require("./constants");
+ const sectionHeader_1 = require("./sectionHeader");
+ const emojiRow_1 = require("./emojiRow");
+@@ -73,9 +73,9 @@ const EmojiPicker = ({ recent = [], emojis = [], loading = false, autoFocus = tr
+     return (<react_native_1.View style={[styles.container, { backgroundColor }]} onLayout={event => setWidth(event.nativeEvent.layout.width)}>
+ 			<tabBar_1.TabBar activeCategory={category} onPress={selectTab} categories={finalCategories} darkMode={darkMode} width={width}/>
+ 			<react_native_1.View style={{ flex: 1 }}>
+-				<react_native_1.View style={styles.searchbarContainer}>
+-					<input_1.Input placeholder="Search..." value={searchQuery} onChangeText={setSearchQuery} autoFocus={autoFocus} darkMode={darkMode}/>
+-				</react_native_1.View>
++				{/* <react_native_1.View style={styles.searchbarContainer}> */}
++					{/* <input_1.Input placeholder="Search..." value={searchQuery} onChangeText={setSearchQuery} autoFocus={autoFocus} darkMode={darkMode}/> */}
++				{/* </react_native_1.View> */}
+ 				{!loading ? (<react_native_1.SectionList style={{ flex: 1 }} sections={searchQuery ? searchResults : init && recent.length ? [sections[0], activeSection] : [activeSection]} keyExtractor={(item) => item.key} renderItem={renderEmojiRow} renderSectionHeader={renderSectionHeader} contentContainerStyle={{ paddingBottom: colSize }} horizontal={false} keyboardShouldPersistTaps={"handled"} removeClippedSubviews showsVerticalScrollIndicator={false} stickySectionHeadersEnabled={false} ref={sectionList} onScrollBeginDrag={react_native_1.Keyboard.dismiss}/>
+         // <SectionList
+         // 	style={{flex: 1}}
+diff --git a/node_modules/rn-emoji-picker/dist/tabBar/index.js b/node_modules/rn-emoji-picker/dist/tabBar/index.js
+index bcbfcf8..17ea450 100644
+--- a/node_modules/rn-emoji-picker/dist/tabBar/index.js
++++ b/node_modules/rn-emoji-picker/dist/tabBar/index.js
+@@ -15,7 +15,7 @@ const TabBar = ({ categories, activeCategory, onPress, darkMode, width }) => {
+                 ]}>
+ 							<react_native_1.Text style={[
+                     styles.emoji,
+-                    { fontSize: uiSize }
++                    { fontSize: 20 }
+                 ]}>
+ 								{category.emoji}
+ 							</react_native_1.Text>

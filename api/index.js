@@ -8,20 +8,21 @@ import Toast from 'react-native-root-toast';
  */
 
 
-const host = 'rtcode.asia';
+const host1 = 'rtcode.asia';
+const host2 = '101.42.11.155'
 // const host = '10.131.127.177';
 const port1 = '13799';
 const port2 = '9988';
 
 
 // const BASE_URL = Platform.OS === 'android' ? 'http://10.0.2.2:8080' : 'http://localhost:8080'
-// const BASE_URL = Platform.OS === 'android' ? `http://${host}:${port1}` : `http://localhost:${port1}`
-const BASE_URL = `https://${host}:${port1}`
+// const BASE_URL = Platform.OS === 'android' ? `http://${host1}:${port1}` : `http://localhost:${port1}`
+const BASE_URL = `https://${host1}:${port1}`
 
 export const pre_url = BASE_URL;
 
-// export const ws_url = Platform.OS === 'android' ? `${host}:${port2}` : `localhost:${port2}`
-export const ws_url = `${host}:${port2}`
+// export const ws_url = Platform.OS === 'android' ? `${host1}:${port2}` : `localhost:${port2}`
+export const ws_url = `${host2}:${port2}`
 // export const ws_url = Platform.OS === 'android' ? '10.0.2.2:9988' : 'localhost:9988'
 
 const fetchWrapper = async (endpoint, options = {}) => {
@@ -405,7 +406,6 @@ export const updateUserApi = (token, word, type) => {
   // type 可选值有: username、about、phone、email
   let form = {}
   form[type] = word
-  console.log('form: ',form)
   return fetchWrapper('user/update',{
     method: 'POST',
     headers: {

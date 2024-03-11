@@ -17,6 +17,9 @@ import { getData } from '../../utils/storage';
 import { pre_url } from '../../api';
 import Toast from "react-native-root-toast";
 import * as Clipboard from 'expo-clipboard';
+import * as ImagePicker from "expo-image-picker";
+import { AuthContext } from '../../navigation/AuthProvider';
+import {uploadFileApi, updateUserApi } from '../../api';
 
 const SECTIONS = [
   {
@@ -40,8 +43,11 @@ const SECTIONS = [
 const EditProfileScreen = ({navigation}) => {
 
   const {theme} = useContext(ThemeContext);
+  const {token} = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [sections, setSections] = useState(SECTIONS);
+  const [img, setImg] = useState(userData?.avatar);
+  const [mimeType, setMimeType] = useState('');
 
   useEffect(() => {
     getUser();
@@ -52,6 +58,7 @@ const EditProfileScreen = ({navigation}) => {
     if(u){
       u.avatar =  pre_url + '/file/preview/' + u.avatar;
       setUserData(u);
+      setImg(u.avatar);
       setSections((prevSections) => {
         return prevSections.map(section => {
           return {
@@ -90,6 +97,31 @@ const EditProfileScreen = ({navigation}) => {
       navigation.replace('Login');
     }
   }
+
+  const changeAvatar = async () => {
+    // 打开相册
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+    });
+    if (!result.canceled) {
+      setMimeType(result.assets[0].mimeType);
+      setImg(result.assets[0].uri);
+
+      // type存在，说明需要上传图片到服务器,然后拿到url！
+      const r = await uploadFileApi(token,result.assets[0].uri,result.assets[0].mimeType);
+      if(r.code != 200){
+        Toast.show(r.msg,{position: Toast.positions.CENTER});
+        return;
+      }
+      console.log(r.data);
+      let avatar =  await r.data;
+
+      const res = await updateUserApi(token, avatar, 'avatar');
+      console.log(res);
+      Toast.show(res.msg,{position: Toast.positions.CENTER});
+    }
+  }
   
   return (
     <SafeAreaView style={[{flex: 1,backgroundColor: theme.colors.background,}]}>
@@ -97,12 +129,12 @@ const EditProfileScreen = ({navigation}) => {
         <View style={styles.profile}>
           <TouchableOpacity
             onPress={() => {
-              // handle onPress
+              changeAvatar();
             }}>
             <View style={styles.profileAvatarWrapper}>
               <Image
                 alt=""
-                source={{ uri: userData?.avatar}}
+                source={{ uri: img}}
                 style={styles.profileAvatar} />
 
               <View style={styles.profileAction}>

@@ -13,6 +13,7 @@ import { ThemeContext } from "../../navigation/ThemeProvider";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { AuthContext } from "../../navigation/AuthProvider";
 import { pre_url,getFriendListApi,getGroupListApi, getNewFriendCountApi } from "../../api";
+import Toast from "react-native-root-toast";
 
 const items = [
   { key: 'friends', title: '好友' },
@@ -37,11 +38,11 @@ const ContactScreen = ({navigation}) => {
       getlist();
       getFriendCount();
     }
-  }, [msgs.code]);
+  }, [msgs]);
 
-  const getlist = async () => {
-    await getfriend();
-    await getgroup();
+  const getlist = () => {
+    getfriend();
+    getgroup();
   }
 
   const getfriend = async () => {
@@ -101,7 +102,10 @@ const ContactScreen = ({navigation}) => {
             <AntDesign name='right' size={18} color={theme.colors.placeholder} />
           </View>
         </Pressable>
-        <Pressable style={styles.iconContainer} onPress={() => navigation.navigate('NewContact',{isGroup: true})}>
+        <Pressable style={styles.iconContainer} onPress={() => {
+          // navigation.navigate('NewContact',{isGroup: true})
+          Toast.show('敬请期待',{position: Toast.positions.CENTER})
+        }}>
           <Text style={[styles.email,{color: theme.colors.text}]}>群通知</Text>
           <AntDesign name='right' size={18} color={theme.colors.placeholder} />
         </Pressable>
@@ -145,7 +149,7 @@ const Contact = ({item, totalName = '朋友'}) => {
   }, []);
 
   return (
-    <SafeAreaView style={{ backgroundColor: theme.colors.background }}>
+    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
         {sections.map(({ letter, items }) => (
           <View style={styles.section} key={letter}>
@@ -191,16 +195,20 @@ const Contact = ({item, totalName = '朋友'}) => {
             </View>
           </View>
         ))}
-
+        
         {
-          item ? 
+          item.length > 0 ? 
           <View style={styles.footer}>
             <Text style={[styles.foot, {color: theme.colors.text}]}>{item.length}个{totalName}</Text>
           </View>
-          : null
+          : (
+            <View style={{flex:1,alignItems: 'center', justifyContent: 'center'}}>
+              <Text>暂无</Text>
+            </View>
+          )
         }
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

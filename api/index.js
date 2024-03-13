@@ -41,7 +41,6 @@ const fetchWrapper = async (endpoint, options = {}) => {
       throw new Error(`HTTP 错误! 原因: ${JSON.stringify(res)}`);
     }
     const result = await res.json();
-    
     return result;
   } catch (error) {
     console.log(endpoint + ' API 请求失败: ', error);

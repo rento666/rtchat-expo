@@ -23,7 +23,7 @@ const windowWidth = Dimensions.get('window').width;
 
 const HomeScreen = ({navigation}) => {
   const {theme} = useContext(ThemeContext);
-  const {token, msgs} = useContext(AuthContext);
+  const {token, msgs, logout} = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [Messages,setMessages] = useState([]);
 
@@ -51,6 +51,9 @@ const HomeScreen = ({navigation}) => {
       setMessages(d);
     }else{
       Toast.show(res.msg,{position: Toast.positions.CENTER});
+      if(res.code === 401){
+        logout();
+      }
     }
   }
 

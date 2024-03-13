@@ -11,8 +11,8 @@ import { ThemeContext } from '../../navigation/ThemeProvider';
 
 
 const ForgotScreen = ({navigation}) => {
-  const [email, setEmail] = useState('rento163@163.com');
-  const [password, setPassword] = useState('123456');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [code, setCode] = useState();
   const [codeBtn, setCodeBtn] = useState("发送");
   const [countDown, setCountDown] = useState(60);

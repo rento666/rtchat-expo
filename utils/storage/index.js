@@ -50,6 +50,20 @@ export async function setData(key, value) {
   }
 }
 
+export async function removeItem(key) {
+  try {
+    if(key == null){
+      console.log('remove data err: key is null')
+      return false
+    }
+    await AsyncStorage.removeItem(key)
+    return true
+  } catch (e) {
+    console.log('remove data err: ', e)
+    return false
+  }
+}
+
 /**
  * 读取字符串值
  * @param {string} key 

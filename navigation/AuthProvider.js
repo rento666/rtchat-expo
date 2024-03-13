@@ -6,7 +6,7 @@ import React,{
 import { ThemeProvider } from "./ThemeProvider";
 import Toast from "react-native-root-toast";
 import { loginApi, registerApi, ws_url } from "../api";
-import { setData } from "../utils/storage";
+import { setData, removeItem } from "../utils/storage";
 import * as Notifications from 'expo-notifications';
 
 export const AuthContext = createContext();
@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     Toast.show('退出成功', {position: Toast.positions.CENTER});
     setToken(null);
+    removeItem('user');
   }
   const createWebSocket = () => {
     try {

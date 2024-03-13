@@ -22,7 +22,7 @@ const BASE_URL = `https://${host1}:${port1}`
 export const pre_url = BASE_URL;
 
 // export const ws_url = Platform.OS === 'android' ? `${host1}:${port2}` : `localhost:${port2}`
-export const ws_url = `${host2}:${port2}`
+export const ws_url = `${host1}:${port2}/ws`
 // export const ws_url = Platform.OS === 'android' ? '10.0.2.2:9988' : 'localhost:9988'
 
 const fetchWrapper = async (endpoint, options = {}) => {

@@ -9,13 +9,10 @@ import { getData } from '../utils/storage';
 const Routes = () => {
 
   const {token} = useContext(AuthContext);
-  const [user, setUser] = useState(null);
+  var u;
 
   const getU = async () => {
-    let u = await getData('user')
-    if(u){
-      setUser(u);
-    }
+    u = await getData('user')
   }
 
   useEffect(()=>{
@@ -24,7 +21,7 @@ const Routes = () => {
 
   return (
     <NavigationContainer>
-      { token || user ? <AppStack /> : <AuthStack />}
+      { token || u ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };

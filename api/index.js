@@ -9,7 +9,6 @@ import Toast from 'react-native-root-toast';
 
 
 const host1 = 'rtcode.asia';
-const host2 = '101.42.11.155'
 // const host = '10.131.127.177';
 const port1 = '13799';
 const port2 = '9988';

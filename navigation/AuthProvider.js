@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
   }
   const createWebSocket = () => {
     try {
-      const newWs = new WebSocket(`ws://${ws_url}`);
+      const newWs = new WebSocket(`wss://${ws_url}`);
       setWs(newWs);
     } catch (e) {
       console.log('websocket error: ', e);

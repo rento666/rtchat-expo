@@ -42,7 +42,7 @@ const ChatInput = ({user, fid, isGroup}) => {
     setIsToolOpen(false);
     setHeightContainer('auto');
   };
-
+  // 向操作系统请求权限
   useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
@@ -61,6 +61,7 @@ const ChatInput = ({user, fid, isGroup}) => {
     })();
   },[]);
 
+  // 键盘展开、收起事件
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',

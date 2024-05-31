@@ -478,23 +478,23 @@ const AppStack = () => {
     return hideOnScreens.indexOf(routeName) <= -1;
   };
 
-  useEffect(() =>{
-    if(msgs.code == 10002){
-      // 有新的聊天信息需要处理
-      noRead();
-    }
-  }, [msgs.code]);
+  // useEffect(() =>{
+  //   if(msgs.code == 10002){
+  //     // 有新的聊天信息需要处理
+  //     noRead();
+  //   }
+  // }, [msgs.code]);
 
-  const noRead = async () => {
-    if(!token){
-      return;
-    }
-    const res = await getNoReadCountApi(token);
-    if(res.code == 200){
-      console.log('当前未读消息数量：',res.data)
-      setCount(res.data);
-    }
-  }
+  // const noRead = async () => {
+  //   if(!token){
+  //     return;
+  //   }
+  //   const res = await getNoReadCountApi(token);
+  //   if(res.code == 200){
+  //     console.log('当前未读消息数量：',res.data)
+  //     setCount(res.data);
+  //   }
+  // }
 
   return (
     <>
